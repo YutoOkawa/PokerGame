@@ -1,13 +1,15 @@
 package com.pokergame.pokergame;
 
-public class Card {
-	private int  number;
+public class Diamond extends Card {
+	private int number;
 	
+	@Override
 	public int getNumber() {
 		return number;
 	}
 	
-	public void setNumber(int number) {
+	@Override
+    public void setNumber(int number) {
         this.number = number;
     }
 }
