@@ -1,17 +1,15 @@
 package com.pokergame.pokergame;
 
-public class Card {
-	private int  number;
+public abstract class Card {
+	private int number;
 	
 	Card(int number) {
 		this.number = number;
 	}
 	
-	public int getNumber() {
-		return number;
-	}
+	public abstract int getNumber();
 	
-	public void setNumber(int number) {
-        this.number = number;
-    }
+	public abstract void setNumber(int number);
+	
+	public abstract String getName();
 }
