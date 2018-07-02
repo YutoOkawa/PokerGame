@@ -4,7 +4,7 @@ public class Diamond extends Card {
 	private int number;
 	public static final String name = "Diamond";
 	
-	Diamond(int number) {
+	public Diamond(int number) {
 		super(number);
 	}
 	

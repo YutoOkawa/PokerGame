@@ -3,13 +3,21 @@ package com.pokergame.pokergame;
 public abstract class Card {
 	private int number;
 	
-	Card(int number) {
+	public Card() {
+		
+	}
+	
+	public Card(int number) {
 		this.number = number;
 	}
 	
-	public abstract int getNumber();
+	public int getNumber() {
+		return number;
+	}
 	
-	public abstract void setNumber(int number);
+    public void setNumber(int number) {
+        this.number = number;
+    }
 	
 	public abstract String getName();
 }

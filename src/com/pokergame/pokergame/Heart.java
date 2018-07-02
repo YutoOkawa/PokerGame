@@ -4,7 +4,7 @@ public class Heart extends Card {
 	private int number;
 	public static final String name = "Heart";
 	
-	Heart(int number) {
+	public Heart(int number) {
 		super(number);
 	}
 	

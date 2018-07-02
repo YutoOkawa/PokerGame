@@ -2,10 +2,9 @@ package com.pokergame.pokergame;
 
 public class Spade extends Card {
 	private int number;
-	
 	public static final String name = "Spade";
 	
-	Spade(int number) {
+	public Spade(int number) {
 		super(number);
 	}
 	
