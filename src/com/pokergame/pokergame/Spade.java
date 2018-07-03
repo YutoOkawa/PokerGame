@@ -5,7 +5,7 @@ public class Spade extends Card {
 	public static final String name = "Spade";
 	
 	public Spade(int number) {
-		super(number);
+		this.number = number;
 	}
 	
 	@Override
@@ -18,7 +18,7 @@ public class Spade extends Card {
 		return number;
 	}
 	
-	@Override
+	
     public void setNumber(int number) {
         this.number = number;
     }

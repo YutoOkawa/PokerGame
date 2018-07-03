@@ -5,7 +5,7 @@ public class Joker extends Card {
 	private int number;
 	
 	public Joker(int number) {
-		super(number);
+		this.number = number;
 	}
 	
 	@Override
@@ -18,7 +18,7 @@ public class Joker extends Card {
 		return number;
 	}
 	
-	@Override
+	
     public void setNumber(int number) {
         this.number = number;
     }

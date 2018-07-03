@@ -10,6 +10,10 @@ public class PokerGame {
 			System.out.print("記号:"+cardManager.getMyHand().get(i).getName());
 			System.out.println("数字:"+cardManager.getMyHand().get(i).getNumber());
 		}
+		
+		ScoreCalculator scoreCalculator = new ScoreCalculator(cardManager);
+		String yaku = scoreCalculator.createScore();
+		System.out.println(yaku);
 
 	}
 

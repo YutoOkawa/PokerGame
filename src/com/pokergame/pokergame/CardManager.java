@@ -3,6 +3,7 @@ package com.pokergame.pokergame;
 import java.util.*;
 
 
+
 public class CardManager {
 	private Boolean isJoker = false;
 	private ArrayList<Card> myHand;
@@ -59,9 +60,15 @@ public class CardManager {
 	}
 	
 	// 乱数生成
-	public void createRandom() {
+	public int createRandom(int times) {
+		int number;
 		Long seed = System.currentTimeMillis();
 		random = new Random(seed);
+		number = random.nextInt() % times;
+		if(number<0) {
+			number*=-1;
+		}
+		return number;
 	}
 	
 	// 同じカードを引いているかどうか
@@ -77,24 +84,24 @@ public class CardManager {
 	
 	// カードを生成する
 	public void createCard() {
-		String kind=null;
+		String kind;
 		int number;
 		int kind_number;
 		Card card=null;
 		
 		// Jokerを生成するかしないか
 		if(!isJoker) {
-			createRandom();
-			if((random.nextInt() % 53)==0) {
-				card = new Joker(0);
+			if(createRandom(53)==0) {
+				card = new Joker(99);
 				isJoker = true;
+				add(card);
 			}
 		}
 		
 		// Jokerでない場合
 		if(card==null) {
-			createRandom();
-			kind_number = random.nextInt() % 4;
+			kind_number = createRandom(4);
+			
 			switch (kind_number) {
 				case 0: kind = Spade.name; break;
 				case 1: kind = Diamond.name; break;
@@ -104,9 +111,8 @@ public class CardManager {
 			}
 			
 			// 数字(0~12)を生成
-			createRandom();
-			number = random.nextInt() % 13;
-			
+			number = createRandom(13);
+	
 			// すでに山札からそのカードが引かれているかどうか
 			if(!isSameCard(kind, number)) {
 				// カードを生成したあとは山札リストの数字を0にする

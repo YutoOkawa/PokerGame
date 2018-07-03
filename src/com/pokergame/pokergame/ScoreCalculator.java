@@ -2,7 +2,6 @@ package com.pokergame.pokergame;
 
 import java.util.*;
 
-
 public class ScoreCalculator {
 	private CardManager cardManager;
 	private ArrayList<Integer> cardNumber;
@@ -38,14 +37,24 @@ public class ScoreCalculator {
 	// Jokerが手札にあるかどうか
 	public void checkJoker() {
 		if(cardName.indexOf(Joker.name)!=-1) {
+			isJoker = true;
+		} else {
 			isJoker = false;
 		}
-		isJoker = true;
+	}
+	
+	public int checkJoker(int hands) {
+		checkJoker();
+		if(isJoker)
+			return hands-1;
+		else 
+			return hands-2;
 	}
 	
 	// 手札の全ての記号が同じか(Flushであるか)
 	public boolean isFlush() {
-		for(int i=0; i<MY_HAND-1; i++) {
+		int hands = checkJoker(MY_HAND);
+		for(int i=0; i<hands; i++) {
 			if(!cardName.get(i).equals(cardName.get(i+1))) {
 				return false;
 			}
@@ -55,8 +64,9 @@ public class ScoreCalculator {
 	
 	// 手札の全ての数字が順番に並んでいるか(Straightであるか)
 	public boolean isStraight() {
+		int hands = checkJoker(MY_HAND);
 		Collections.sort(cardNumber);
-		for(int i=1; i<MY_HAND; i++) {
+		for(int i=1; i<hands; i++) {
 			if(cardNumber.get(0)!=(cardNumber.get(i)+i)) {
 				return false;
 			}
@@ -65,12 +75,14 @@ public class ScoreCalculator {
 	}
 	
 	public boolean isRoyalStraightFlush() {
-		int aceIndex;
-		if((aceIndex=cardNumber.indexOf(1))==-1) {
+		int aceIndex=cardNumber.indexOf(1);
+		if(aceIndex==-1) {
 			return false;
 		} else {
+			cardNumber.remove(aceIndex);
 			cardNumber.add(aceIndex, 14);
 			if(!(isStraight() && isFlush())) {
+				cardNumber.add(MY_HAND-1,1);
 				return false;
 			}
 		}
@@ -93,6 +105,8 @@ public class ScoreCalculator {
 	
 	// 役の選出
 	public String createScore() {
+		checkJoker();
+		
 		if(isRoyalStraightFlush()) {
 			return Royal_Straight_Flash;
 		} else if (isFlush() && isStraight()) {
@@ -103,17 +117,21 @@ public class ScoreCalculator {
 			return Straight;
 		}
 		
-		switch (Npair()) {
-			case 1:return one_Pair; 
-			case 2:return Two_Pair;
-			case 3:return Three_Card;
-			case 4:return Full_House;
-			case 6:return Four_Card;
-			case 10:return Five_Card;
-			default: break;
+		if (Npair()==6 && isJoker) {
+			return Five_Card;
+		} else if (Npair()==6 || (Npair()==3 && isJoker)) {
+			return Four_Card;
+		} else if (Npair()==4 || (Npair()==2 && isJoker)) {
+			return Full_House;
+		} else if (Npair()==3 || (Npair()==1 && isJoker)) {
+			return Three_Card;
+		} else if (Npair()==2) {
+			return Two_Pair;
+		} else if (Npair()==1 || (Npair()==0 && isJoker)) {
+			return one_Pair;
+		} else {
+			return No_Pair;
 		}
-		
-		return No_Pair;
 	}
 
 	public CardManager getCardManager() {
