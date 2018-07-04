@@ -3,7 +3,7 @@ package com.pokergame.pokergame;
 import java.util.*;
 
 public class ScoreCalculator {
-	private CardManager cardManager;
+	private Player player;
 	private ArrayList<Integer> cardNumber;
 	private ArrayList<String> cardName;
 	private ArrayList<Card> cardList;
@@ -22,9 +22,9 @@ public class ScoreCalculator {
 	private static final String No_Pair = "No_Pair"; 
 	
 	// コンストラクタ
-	public ScoreCalculator(CardManager cardManager) {
-		this.setCardManager(cardManager);
-		cardList = cardManager.getMyHand();
+	public ScoreCalculator(Player player) {
+		this.setPlayer(player);
+		cardList = player.getMyHand();
 		cardNumber = new ArrayList<>();
 		cardName = new ArrayList<>();
 		for(int i=0; i<MY_HAND; i++) {
@@ -105,8 +105,6 @@ public class ScoreCalculator {
 	
 	// 役の選出
 	public String createScore() {
-		checkJoker();
-		
 		if(isRoyalStraightFlush()) {
 			return Royal_Straight_Flash;
 		} else if (isFlush() && isStraight()) {
@@ -134,12 +132,12 @@ public class ScoreCalculator {
 		}
 	}
 
-	public CardManager getCardManager() {
-		return cardManager;
+	public Player getPlayer() {
+		return player;
 	}
 
-	public void setCardManager(CardManager cardManager) {
-		this.cardManager = cardManager;
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 }

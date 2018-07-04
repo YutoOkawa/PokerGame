@@ -1,11 +1,11 @@
 package com.pokergame.pokergame;
 
 public class Club extends Card {
-	private int number;
 	public static final String name = "Club";
+	private int number;
 	
 	public Club(int number) {
-		this.number = number;
+		setNumber(number);
 	}
 	
 	@Override
