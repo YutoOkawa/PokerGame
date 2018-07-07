@@ -15,10 +15,10 @@ public class Deck {
 			for(int k=0; k<MAX_NUMBER; k++) {
 				Card card;
 				switch (i) {
-					case 0: card = new Spade(k); break;
-					case 1: card = new Diamond(k); break;
-					case 2: card = new Heart(k); break;
-					case 3: card = new Club(k); break;
+					case 0: card = new Spade(k+1); break;
+					case 1: card = new Diamond(k+1); break;
+					case 2: card = new Heart(k+1); break;
+					case 3: card = new Club(k+1); break;
 					default: card = null; break;
 				}
 				deck.add(card);
