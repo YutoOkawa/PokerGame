@@ -8,6 +8,7 @@ public class Deck {
 	private ArrayList<Card> deck;
 	private static final int MAX_SUIT = 4;
 	private static final int MAX_NUMBER = 13;
+	private int MAX_DECK = 53;
 	
 	public Deck() {
 		deck = new ArrayList<>();
@@ -35,6 +36,11 @@ public class Deck {
 	}
 	
 	public Card drawCard(int index) {
+		MAX_DECK--;
 		return deck.get(index);
+	}
+
+	public int getMAX_DECK() {
+		return MAX_DECK;
 	}
 }

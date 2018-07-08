@@ -5,8 +5,6 @@ import java.util.*;
 
 public class Player {
 	private ArrayList<Card> myHand;
-	private int myHandCounter=0;
-	private static final int MAX_HAND_CARDS = 5;
 	Random random;
 	
 	// コンストラクタ
@@ -28,6 +26,11 @@ public class Player {
 	// 手札のリセット
 	public void clear() {
 		myHand.clear();
+	}
+	
+	// 手札のカードを返す
+	public Card getHandCard(int index) {
+		return myHand.get(index);
 	}
 	
 	public ArrayList<Card> getMyHand() {
