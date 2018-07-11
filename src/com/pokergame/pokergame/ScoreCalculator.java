@@ -5,7 +5,7 @@ import java.util.*;
 public class ScoreCalculator {
 	private Player player;
 	private ArrayList<Integer> cardNumber;
-	private ArrayList<String> cardName;
+	private ArrayList<Class<?>> cardName;
 	private ArrayList<Card> cardList;
 	private Boolean isJoker;
 	private static final int MY_HAND = 5;
@@ -29,14 +29,14 @@ public class ScoreCalculator {
 		cardName = new ArrayList<>();
 		for(int i=0; i<MY_HAND; i++) {
 			cardNumber.add(cardList.get(i).getNumber());
-			cardName.add(cardList.get(i).getName());
+			cardName.add(cardList.get(i).getClass());
 		}
 		checkJoker();
 	}
 	
 	// Jokerが手札にあるかどうか
 	public void checkJoker() {
-		if(cardName.indexOf(Joker.name)!=-1) {
+		if(cardName.indexOf(Joker.class)!=-1) {
 			isJoker = true;
 		} else {
 			isJoker = false;
@@ -66,7 +66,7 @@ public class ScoreCalculator {
 	public boolean isStraight() {
 		int hands = checkJoker(MY_HAND);
 		Collections.sort(cardNumber);
-		for(int i=1; i<hands; i++) {
+		for(int i=1; i<=hands; i++) {
 			if(cardNumber.get(0)!=(cardNumber.get(i)+i)) {
 				return false;
 			}

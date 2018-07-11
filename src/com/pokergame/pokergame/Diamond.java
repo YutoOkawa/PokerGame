@@ -1,16 +1,10 @@
 package com.pokergame.pokergame;
 
 public class Diamond extends Card {
-	public static final String name = "Diamond";
 	private int number;
 	
 	public Diamond(int number) {
 		setNumber(number);
-	}
-	
-	@Override
-	public String getName() {
-		return name;
 	}
 	
 	@Override

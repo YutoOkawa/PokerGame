@@ -8,6 +8,7 @@ public abstract class Card {
 	
 	public abstract int getNumber();
 	
-    
-	public abstract String getName();
+	public void setIsOpen(Boolean isOpen) {
+		this.isOpen = isOpen;
+	}
 }
