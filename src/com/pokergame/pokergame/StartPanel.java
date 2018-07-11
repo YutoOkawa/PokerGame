@@ -3,9 +3,6 @@ package com.pokergame.pokergame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
 public class StartPanel extends JPanel {
@@ -21,29 +18,11 @@ public class StartPanel extends JPanel {
 		this.setName(name);
 		setLayout(null);
 		font = new Font("SonSerif", Font.ITALIC, 100);
-		JButton  startButton = new JButton("START!!!");
-		startButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO 自動生成されたメソッド・スタブ
-				mainFrame.changePanel(new GamePanel(mainFrame, name,true));
-			}
-		});
-		startButton.setBounds(500, 500, 100, 25);
-		this.add(startButton);
+		Button startButton = new StartButton("START",500,500,true, mainFrame);
+		add(startButton);
 		
-		JButton finishButton = new JButton("EXIT");
-		finishButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO 自動生成されたメソッド・スタブ
-				System.exit(0);
-			}
-		});
-		finishButton.setBounds(500,550,100,25);
-		this.add(finishButton);
+		Button exitButton = new ExitButton("EXIT",500,550);
+		add(exitButton);
 	}
 	
 	public void paintComponent(Graphics g) {

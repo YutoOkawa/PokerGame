@@ -54,7 +54,7 @@ public class ScoreCalculator {
 	// 手札の全ての記号が同じか(Flushであるか)
 	public boolean isFlush() {
 		int hands = checkJoker(MY_HAND);
-		for(int i=0; i<hands; i++) {
+		for(int i=0; i<=hands; i++) {
 			if(!cardName.get(i).equals(cardName.get(i+1))) {
 				return false;
 			}

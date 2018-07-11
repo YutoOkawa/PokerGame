@@ -4,13 +4,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -25,7 +22,9 @@ public class GamePanel extends JPanel implements MouseListener{
 	Boolean inGame;
 	private Boolean isLoading=false;
 	private static final int MY_HAND = 5;
-	JButton startButton;
+	Button startButton;
+	Button finishButton;
+	Button changeCardButton;
 	DealingCardThread dealingCardThread;
 	JLabel[] cardLabels = new JLabel[5];
 	ImageSeceltor imageSeceltor;
@@ -40,98 +39,23 @@ public class GamePanel extends JPanel implements MouseListener{
 		this.inGame = inGame;
 		this.setName(name);
 		setLayout(null);
-	
 		
 		if(inGame) {
-			startButton = new JButton("START!!");
-			startButton.setName("START");
-			startButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					init_poker();
-				}
-			});
-			startButton.setBounds(500,100,100,25);
+			finishButton = new StartButton("FINISH",500, 0, !inGame, mainFrame);
+			add(finishButton);
+			
+			
+			startButton = new PokerButton("START!!",500, 100, this);
 			add(startButton);
 			
-			JButton  endButton = new JButton("FINISH");
-			endButton.setName("FINISH");
-			endButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					removeAll();
-					mainFrame.changePanel(new GamePanel(mainFrame, name,!inGame));
-				}
-			});
-			endButton.setBounds(500, 0, 100, 25);
-			add(endButton);
-			
-			JButton changeButton = new JButton("CHANGE");
-			changeButton.setName("CHANGE");
-			changeButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					int index=0;
-					changeIndex = new Boolean[6];
-					Component[] components = getComponents();
-					for(int i=0; i<components.length; i++) {
-						if(components[i].getClass().equals(JLabel.class)) {
-							if(components[i].getName().equals("Deck")) {
-								index = i;
-							} else {
-								if(!player.getHandCard(i-index-1).isOpen) {
-									remove(cardLabels[i-index-1]);
-									player.change(deck,i-index-1,player.deckCounter);
-									changeIndex[i-index-1]=true;
-								} else {
-									changeIndex[i-index-1] = false;
-								}
-							}
-						} 
-					}
-					repaint();
-					
-					JLabel[] addCardLabels = new JLabel[5];
-					for(int i=0; i<5; i++) {
-						if(changeIndex[i]) { 
-							imageSeceltor = new ImageSeceltor(player.getHandCard(i));
-							ImageIcon imageIcon = new ImageIcon(imageSeceltor.getImageIcon());
-							addCardLabels[i] = new JLabel();
-							addCardLabels[i].setName("CardLabel"+i); 
-							addCardLabels[i].setIcon(imageIcon);
-						}
-					}
-					dealingCardThread = new DealingCardThread(gamePanel, addCardLabels,changeIndex);
-					isLoading = true;
-					dealingCardThread.start();
-					remove(changeButton);
-				}
-			});
-			changeButton.setBounds(500, 200, 100, 25);
-			add(changeButton);
+			changeCardButton = new ChangeCardButton(500, 200, this);
+			add(changeCardButton);
 		} else {
-			JButton  endButton = new JButton("EXIT");
-			endButton.setName("END");
-			endButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					System.exit(0);
-				}
-			});
-			endButton.setBounds(500, 0, 100, 25);
-			add(endButton);
+			finishButton = new StartButton("CONTINUE?",500, 0, !inGame, mainFrame);
+			add(finishButton);
 			
-			JButton continueButton = new JButton("CONTINUE?");
-			continueButton.setName("Continue");
-			continueButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					removeAll();
-					mainFrame.changePanel(new GamePanel(mainFrame, name,!inGame));
-				}
-			});
-			continueButton.setBounds(500,200,100,25);
-			add(continueButton);
+			Button exitButton = new ExitButton("EXIT",500, 100);
+			add(exitButton);
 		}
 		paintCardImage(850, 50);
 		addMouseListener(this);
@@ -174,6 +98,43 @@ public class GamePanel extends JPanel implements MouseListener{
 		paintCardImage(player.getMyHand());
 	}
 	
+	public void change_card() {
+		int index=0;
+		changeIndex = new Boolean[6];
+		Component[] components = getComponents();
+		for(int i=0; i<components.length; i++) {
+			if(components[i].getClass().equals(JLabel.class)) {
+				if(components[i].getName().equals("Deck")) {
+					index = i;
+				} else {
+					if(!player.getHandCard(i-index-1).isOpen) {
+						remove(cardLabels[i-index-1]);
+						player.change(deck,i-index-1,player.deckCounter);
+						changeIndex[i-index-1]=true;
+					} else {
+						changeIndex[i-index-1] = false;
+					}
+				}
+			} 
+		}
+		repaint();
+		
+		JLabel[] addCardLabels = new JLabel[5];
+		for(int i=0; i<5; i++) {
+			if(changeIndex[i]) { 
+				imageSeceltor = new ImageSeceltor(player.getHandCard(i));
+				ImageIcon imageIcon = new ImageIcon(imageSeceltor.getImageIcon());
+				addCardLabels[i] = new JLabel();
+				addCardLabels[i].setName("CardLabel"+i); 
+				addCardLabels[i].setIcon(imageIcon);
+			}
+		}
+		dealingCardThread = new DealingCardThread(gamePanel, addCardLabels,changeIndex);
+		isLoading = true;
+		dealingCardThread.start();
+		remove(changeCardButton);
+	}
+	
 	public void setIsLoading(Boolean isLoading) {
 		this.isLoading = isLoading;
 	}
@@ -200,7 +161,6 @@ public class GamePanel extends JPanel implements MouseListener{
 				}
 			}
 		}
-		
 	}
 	
 	@Override
@@ -229,4 +189,3 @@ public class GamePanel extends JPanel implements MouseListener{
 	@Override
 	public void mouseReleased(MouseEvent e) {}
 }
-
