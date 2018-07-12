@@ -4,12 +4,28 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 
 
 
@@ -18,6 +34,7 @@ public class GamePanel extends JPanel implements MouseListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private BufferedImage image;
 	MainFrame mainFrame;
 	Boolean inGame;
 	private Boolean isLoading=false;
@@ -33,28 +50,33 @@ public class GamePanel extends JPanel implements MouseListener{
 	GamePanel gamePanel = this;
 	String yaku=null;
 	Boolean[] changeIndex;
+	Clip clip;
+	boolean first = false;
 	
 	public GamePanel(MainFrame mainFrame, String name, Boolean inGame) {
 		this.mainFrame = mainFrame;
 		this.inGame = inGame;
 		this.setName(name);
 		setLayout(null);
+		MusicClip musicClip = new MusicClip(new File("/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/HappyStation1.wav"));
+		clip = musicClip.createClip();
+		clip.loop(Clip.LOOP_CONTINUOUSLY);
 		
 		if(inGame) {
-			finishButton = new StartButton("FINISH",500, 0, !inGame, mainFrame);
+			finishButton = new StartButton("FINISH",500, 0, !inGame, mainFrame,clip);
 			add(finishButton);
-			
 			
 			startButton = new PokerButton("START!!",500, 100, this);
 			add(startButton);
 			
-			changeCardButton = new ChangeCardButton(500, 200, this);
+			changeCardButton = new ChangeCardButton(500, 100, this);
 			add(changeCardButton);
+			changeCardButton.setVisible(false);
 		} else {
-			finishButton = new StartButton("CONTINUE?",500, 0, !inGame, mainFrame);
+			finishButton = new StartButton("CONTINUE?",500, 100, !inGame, mainFrame,clip);
 			add(finishButton);
 			
-			Button exitButton = new ExitButton("EXIT",500, 100);
+			Button exitButton = new ExitButton("EXIT",500, 0,clip);
 			add(exitButton);
 		}
 		paintCardImage(850, 50);
@@ -100,6 +122,7 @@ public class GamePanel extends JPanel implements MouseListener{
 	
 	public void change_card() {
 		int index=0;
+		yaku = null;
 		changeIndex = new Boolean[6];
 		Component[] components = getComponents();
 		for(int i=0; i<components.length; i++) {
@@ -133,6 +156,20 @@ public class GamePanel extends JPanel implements MouseListener{
 		isLoading = true;
 		dealingCardThread.start();
 		remove(changeCardButton);
+		first = false;
+	}
+	
+	public static Clip createClip(File path) {
+		try (AudioInputStream ais = AudioSystem.getAudioInputStream(path)) {
+			AudioFormat audioFormat = ais.getFormat();
+			DataLine.Info dataLine = new DataLine.Info(Clip.class, audioFormat);
+			Clip clip = (Clip)AudioSystem.getLine(dataLine); 
+			clip.open(ais);
+			return clip;
+		} catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public void setIsLoading(Boolean isLoading) {
@@ -141,23 +178,41 @@ public class GamePanel extends JPanel implements MouseListener{
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if(!inGame) {
-			g.setColor(Color.BLUE);
-			g.drawString("END", 500, 400);
+		
+		Graphics2D graphics2d = (Graphics2D) g;
+		
+		try {
+			image = ImageIO.read(getClass().getResource("b32051efcf10e0b8bb5066d5da63befc_m.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			image = null;
 		}
+		
+		double imageWidth = image.getWidth();
+		double imageHeight  = image.getHeight();
+		double panelWidth = this.getWidth();
+		double panelHeight = this.getWidth();
+		
+		double sx = (panelWidth/imageWidth);
+		double sy = (panelHeight/imageHeight);
+		
+		AffineTransform affineTransform = AffineTransform.getScaleInstance(sx, sy);
+		graphics2d.drawImage(image, affineTransform, this);
 		
 		if(yaku!=null) {
 			g.setColor(Color.RED);
-			Font font = new Font("SanSerif", Font.ITALIC, 30);
+			Font font = new Font("Sazanami Gothic", Font.PLAIN, 50);
 			g.setFont(font);
-			g.drawString(yaku, 500, 350);
+			g.drawString(yaku, 450, 350);
+			changeCardButton.setVisible(true);
 		}
 		
 		if(player!=null) {
 			for(int i=0; i<5; i++) {
 				if(!player.getHandCard(i).isOpen) {
-					g.setColor(Color.BLACK);
-					g.drawString("選択中", 100+i*200, 400);
+					g.setColor(Color.RED);
+					Ellipse2D ellipse = new Ellipse2D.Double(125+200*i, 400, 40, 40);
+					graphics2d.fill(ellipse);
 				}
 			}
 		}
