@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
@@ -23,12 +25,16 @@ public class StartPanel extends JPanel {
 	MainFrame mainFrame;
 	Font font;
 	private BufferedImage image;
+	Path mpath = Paths.get("../public/HappyCommanders 1.wav");
+	Path picpath = Paths.get("../public/b667141ad6d380481237b452f6a4b6fe_m.jpg");
+	private String music_path = mpath.toAbsolutePath().toString();
+	private String pic_path = picpath.toAbsolutePath().toString();
 	
 	public StartPanel(MainFrame mainFrame, String name) {
 		this.mainFrame = mainFrame;
 		this.setName(name);
 		setLayout(null);
-		MusicClip musicClip = new MusicClip(new File("/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/HappyCommanders 1.wav"));
+		MusicClip musicClip = new MusicClip(new File(music_path));
 		Clip clip = musicClip.createClip();
 		GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		Font fonts[] = graphicsEnvironment.getAllFonts();
@@ -50,7 +56,7 @@ public class StartPanel extends JPanel {
 		Graphics2D graphics2d = (Graphics2D) g;
 		
 		try {
-			image = ImageIO.read(getClass().getResource("b667141ad6d380481237b452f6a4b6fe_m.jpg"));
+			image = ImageIO.read(new File(pic_path));
 		} catch (IOException e) {
 			e.printStackTrace();
 			image = null;
