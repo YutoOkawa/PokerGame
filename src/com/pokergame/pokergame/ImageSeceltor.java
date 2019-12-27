@@ -3,6 +3,7 @@ package com.pokergame.pokergame;
 public class ImageSeceltor {
 	private Card card;
 	private int number;
+	private String path = "../public/CardImage/gif/";
 	
 	public ImageSeceltor(Card card) {
 		this.card = card;
@@ -11,130 +12,127 @@ public class ImageSeceltor {
 	
 	public String getImageIcon() {
 		if(!card.isOpen) {
-			return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/z02.gif";
+			return path+"z02.gif";
 		} else {
 			if (card.getClass().equals(Spade.class)) {
 				switch (number) {
 					case 1:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s01.gif";
+						return path+"s01.gif";
 					case 2:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s02.gif";
+						return path+"s02.gif";
 					case 3:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s03.gif";
+						return path+"s03.gif";
 					case 4:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s04.gif";
+						return path+"s04.gif";
 					case 5:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s05.gif";
+						return path+"s05.gif";
 					case 6:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s06.gif";
+						return path+"s06.gif";
 					case 7:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s07.gif";
+						return path+"s07.gif";
 					case 8:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s08.gif";
+						return path+"s08.gif";
 					case 9:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s09.gif";
+						return path+"s09.gif";
 					case 10:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s10.gif";
+						return path+"s10.gif";
 					case 11:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s11.gif";
+						return path+"s11.gif";
 					case 12:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s12.gif";
+						return path+"s12.gif";
 					default:
-						return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/s13.gif";
+						return path+"s13.gif";
 				}
 			} else if (card.getClass().equals(Diamond.class)) {
 				switch (number) {
-				case 1:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d01.gif";
-				case 2:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d02.gif";
-				case 3:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d03.gif";
-				case 4:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d04.gif";
-				case 5:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d05.gif";
-				case 6:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d06.gif";
-				case 7:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d07.gif";
-				case 8:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d08.gif";
-				case 9:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d09.gif";
-				case 10:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d10.gif";
-				case 11:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d11.gif";
-				case 12:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d12.gif";
-				default:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/d13.gif";
+					case 1:
+						return path+"d01.gif";
+					case 2:
+						return path+"d02.gif";
+					case 3:
+						return path+"d03.gif";
+					case 4:
+						return path+"d04.gif";
+					case 5:
+						return path+"d05.gif";
+					case 6:
+						return path+"d06.gif";
+					case 7:
+						return path+"d07.gif";
+					case 8:
+						return path+"d08.gif";
+					case 9:
+						return path+"d09.gif";
+					case 10:
+						return path+"d10.gif";
+					case 11:
+						return path+"d11.gif";
+					case 12:
+						return path+"d12.gif";
+					default:
+						return path+"d13.gif";
 				}
-			
 			} else if (card.getClass().equals(Heart.class)) {
 				switch (number) {
-				case 1:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h01.gif";
-				case 2:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h02.gif";
-				case 3:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h03.gif";
-				case 4:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h04.gif";
-				case 5:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h05.gif";
-				case 6:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h06.gif";
-				case 7:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h07.gif";
-				case 8:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h08.gif";
-				case 9:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h09.gif";
-				case 10:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h10.gif";
-				case 11:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h11.gif";
-				case 12:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h12.gif";
-				default:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/h13.gif";
+					case 1:
+						return path+"h01.gif";
+					case 2:
+						return path+"h02.gif";
+					case 3:
+						return path+"h03.gif";
+					case 4:
+						return path+"h04.gif";
+					case 5:
+						return path+"h05.gif";
+					case 6:
+						return path+"h06.gif";
+					case 7:
+						return path+"h07.gif";
+					case 8:
+						return path+"h08.gif";
+					case 9:
+						return path+"h09.gif";
+					case 10:
+						return path+"h10.gif";
+					case 11:
+						return path+"h11.gif";
+					case 12:
+						return path+"h12.gif";
+					default:
+						return path+"h13.gif";
 				}
-			
 			} else if (card.getClass().equals(Club.class)) {
 				switch (number) {
-				case 1:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c01.gif";
-				case 2:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c02.gif";
-				case 3:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c03.gif";
-				case 4:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c04.gif";
-				case 5:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c05.gif";
-				case 6:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c06.gif";
-				case 7:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c07.gif";
-				case 8:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c08.gif";
-				case 9:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c09.gif";
-				case 10:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c10.gif";
-				case 11:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c11.gif";
-				case 12:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c12.gif";
-				default:
-					return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/c13.gif";
+					case 1:
+						return path+"c01.gif";
+					case 2:
+						return path+"c02.gif";
+					case 3:
+						return path+"c03.gif";
+					case 4:
+						return path+"c04.gif";
+					case 5:
+						return path+"c05.gif";
+					case 6:
+						return path+"c06.gif";
+					case 7:
+						return path+"c07.gif";
+					case 8:
+						return path+"c08.gif";
+					case 9:
+						return path+"c09.gif";
+					case 10:
+						return path+"c10.gif";
+					case 11:
+						return path+"c11.gif";
+					case 12:
+						return path+"c12.gif";
+					default:
+						return path+"c13.gif";
 				}
 			} else {
-				return "/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/x01.gif";
+				return path+"x01.gif";
 			}
 		}
 	}
 }
-	

@@ -52,13 +52,16 @@ public class GamePanel extends JPanel implements MouseListener{
 	Boolean[] changeIndex;
 	Clip clip;
 	boolean first = false;
+	private String mainPicPath = "../public/b32051efcf10e0b8bb5066d5da63befc_m.jpg";
+	private String musicPath = "../public/HappyStation1.wav";
+	private String iconPath = "../public/CardImage/gif/z02.gif";
 	
 	public GamePanel(MainFrame mainFrame, String name, Boolean inGame) {
 		this.mainFrame = mainFrame;
 		this.inGame = inGame;
 		this.setName(name);
 		setLayout(null);
-		MusicClip musicClip = new MusicClip(new File("/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/HappyStation1.wav"));
+		MusicClip musicClip = new MusicClip(new File(musicPath));
 		clip = musicClip.createClip();
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
 		
@@ -104,7 +107,7 @@ public class GamePanel extends JPanel implements MouseListener{
 		if(inGame) { 
 			JLabel jLabel = new JLabel();
 			jLabel.setName("Deck");
-			ImageIcon imageIcon = new ImageIcon("/Users/yuuto-ookawa/Documents/Programming/java/poker_game/src/com/pokergame/pokergame/CardImage/gif/z02.gif");
+			ImageIcon imageIcon = new ImageIcon(iconPath);
 			jLabel.setIcon(imageIcon);
 			jLabel.setBounds(x, y, 200, 300);
 			add(jLabel);
@@ -182,7 +185,7 @@ public class GamePanel extends JPanel implements MouseListener{
 		Graphics2D graphics2d = (Graphics2D) g;
 		
 		try {
-			image = ImageIO.read(getClass().getResource("b32051efcf10e0b8bb5066d5da63befc_m.jpg"));
+			image = ImageIO.read(new File(mainPicPath));
 		} catch (IOException e) {
 			e.printStackTrace();
 			image = null;

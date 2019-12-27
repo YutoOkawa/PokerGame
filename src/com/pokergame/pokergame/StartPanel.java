@@ -25,10 +25,8 @@ public class StartPanel extends JPanel {
 	MainFrame mainFrame;
 	Font font;
 	private BufferedImage image;
-	Path mpath = Paths.get("../public/HappyCommanders 1.wav");
-	Path picpath = Paths.get("../public/b667141ad6d380481237b452f6a4b6fe_m.jpg");
-	private String music_path = mpath.toAbsolutePath().toString();
-	private String pic_path = picpath.toAbsolutePath().toString();
+	private String music_path = "../public/HappyCommanders 1.wav";
+	private String pic_path = "../public/b667141ad6d380481237b452f6a4b6fe_m.jpg";
 	
 	public StartPanel(MainFrame mainFrame, String name) {
 		this.mainFrame = mainFrame;
