@@ -4,11 +4,10 @@
 
 ## Usage
 ```bash:
-/src
+$ git clone https://github.com/YutoOkawa/PokerGame.git
+$ cd PokerGame
+$ cd src
 $ javac com/pokergame/pokergame/PokerGame.java -d ../bin
-```
-
-```bash:PokerGame
-/bin
+$ cd ../bin
 $ java com.pokergame.pokergame.Pokergame
 ```
