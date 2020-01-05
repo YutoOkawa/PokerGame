@@ -3,10 +3,12 @@
 カードの交換は一度きりとなっています.
 
 ## Usage
-```bash:PokerGame
+```bash:
+/src
 $ javac com/pokergame/pokergame/PokerGame.java -d ../bin
 ```
 
 ```bash:PokerGame
+/bin
 $ java com.pokergame.pokergame.Pokergame
 ```
